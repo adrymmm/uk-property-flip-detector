@@ -1,3 +1,4 @@
+-- Raw ingestion layer for HM Land Registry's Price Paid Data CSV
 CREATE DATABASE land_registry;
 
 CREATE TABLE raw_price_paid (
