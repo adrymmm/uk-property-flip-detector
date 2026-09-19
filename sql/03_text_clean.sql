@@ -7,6 +7,9 @@ DECLARE
 BEGIN
     compact := upper(regexp_replace(input, '\s+', '', 'g'));
     len := length(compact);
+    IF len < 5 THEN
+        RETURN NULL;
+    END IF;
     RETURN substring(compact FROM 1 FOR len - 3) || ' ' || substring(compact FROM len - 2 FOR 3);
 END;
 $$ LANGUAGE plpgsql;
