@@ -1,0 +1,16 @@
+[project]
+name = "uk-property-flip-detector"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=1.5.5",
+    "jupyterlab>=4.6.3",
+    "pyarrow>=25.0.1",
+    "python-dotenv>=1.2.3",
+    "splink>=4.0.17",
+]
+
+[dependency-groups]
+dev = [
+    "nbstripout>=0.9.1",
+]
