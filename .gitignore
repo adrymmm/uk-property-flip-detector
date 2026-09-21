@@ -5,3 +5,6 @@ data/
 *.parquet
 .vscode
 .vccode/
+models/
+scratch
+scratch/
