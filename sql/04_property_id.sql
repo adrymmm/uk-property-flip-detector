@@ -37,3 +37,4 @@ JOIN property_ids p
  AND t.paon_clean = p.paon_clean
  AND coalesce(t.flat_identifier, t.saon_clean, '<NONE>') = p.unit_key
  AND street_key(t.street_clean) = p.street_key;
+WHERE NOT (t.property_type IN ('F', 'O') AND t.saon_clean IS NULL);
