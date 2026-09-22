@@ -20,7 +20,7 @@ SELECT
 FROM (
     SELECT DISTINCT
         coalesce(postcode_clean, '<NONE>') AS postcode_clean,
-        paon_clean,
+        coalesce(paon_clean, '<NONE>') AS paon_clean,
         coalesce(flat_identifier, saon_clean, '<NONE>') AS unit_key,
         street_key(street_clean) AS street_key
     FROM staging_price_paid_cleaned
@@ -34,7 +34,13 @@ SELECT
 FROM staging_price_paid_cleaned t
 JOIN property_ids p
   ON coalesce(t.postcode_clean, '<NONE>') = p.postcode_clean
- AND t.paon_clean = p.paon_clean
+ AND coalesce(t.paon_clean, '<NONE>') = p.paon_clean
  AND coalesce(t.flat_identifier, t.saon_clean, '<NONE>') = p.unit_key
- AND street_key(t.street_clean) = p.street_key;
+ AND street_key(t.street_clean) = p.street_key
 WHERE NOT (t.property_type IN ('F', 'O') AND t.saon_clean IS NULL);
+
+-- Unit unknown table
+CREATE TABLE transaction_unit_unknown AS
+SELECT transaction_id
+FROM staging_price_paid_cleaned
+WHERE property_type IN ('F', 'O') AND saon_clean IS NULL;
