@@ -5,12 +5,15 @@ requires-python = ">=3.12"
 dependencies = [
     "duckdb>=1.5.5",
     "jupyterlab>=4.6.3",
+    "pandas<3.0.0",
     "pyarrow>=25.0.1",
+    "pyspark>=4.2.0",
     "python-dotenv>=1.2.3",
     "splink>=4.0.17",
 ]
 
 [dependency-groups]
 dev = [
+    "nbdime>=4.0.4",
     "nbstripout>=0.9.1",
 ]
