@@ -31,3 +31,12 @@ FROM (
     WINDOW w AS (PARTITION BY t.property_id ORDER BY s.date_of_transfer, s.transaction_id)
 ) paired
 WHERE prev_transaction_id IS NOT NULL;
+
+
+CREATE VIEW repeat_sale_pairs_regression AS
+SELECT *
+FROM repeat_sale_pairs
+WHERE holding_period_days > 0
+  AND prev_ppd_category = 'A'
+  AND curr_ppd_category = 'A'
+  AND prev_duration = curr_duration;
